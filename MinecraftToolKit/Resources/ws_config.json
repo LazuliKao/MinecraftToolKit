@@ -1,0 +1,180 @@
+{
+    "Triggers": {
+        "PlayerMessage": [
+            {
+                "Variables": [
+                    //
+                    //{
+                    //    "Name": "Message",
+                    //     //自定义名称
+                    //    "Path": ["body","properties","Message"
+                    //     //数值源数据包目录，参考https://minecraft-zh.gamepedia.com/%E6%95%99%E7%A8%8B/WebSocket
+                    //    ]
+                    //}
+                    {
+                        "Name": "Message",
+                        "Path": [
+                            "body",
+                            "properties",
+                            "Message"
+                        ]
+                    },
+                    {
+                        "Name": "PlayerName",
+                        "Path": [
+                            "body",
+                            "properties",
+                            "Sender"
+                        ]
+                    }
+                ],
+                "Operations": [
+                    {
+                        "Type": "Replace",
+                        "TargetVariable": "Message",
+                        "Find": "***",
+                        "Replacement": "§e???§r",
+                        "Filter": true
+                    },
+                    {
+                        "Type": "RegexReplace",
+                        "TargetVariable": "Message",
+                        "Pattern": "^!",
+                        "Replacement": "§c",
+                        "Filter": {
+                            "all_of": [
+                                {
+                                    "Variable": "PlayerName",
+                                    "Operator": "==",
+                                    "Value": "gxh2004"
+                                }
+                            ]
+                        }
+                    }
+                    //"Operations"操作，
+                    //  会在下面的筛选器和Actions被执行前执行
+                    //  同样的，每个操作都有一个"Filter"来筛选是否执行，"Filter":true保持执行
+                    //-------------------------------------------------
+                    //普通替换
+                    //{
+                    //    "Type": "Replace",          //类型
+                    //    "TargetVariable": "Message",//操作的变量，需要提前在"Variables"定义
+                    //    "Find": "***",              //寻找的字符串
+                    //    "Replacement": "???",       //替换掉的字符串
+                    //    "Filter": true              //筛选是否执行
+                    //}
+                    //--------------------------------------------------
+                    //正则表达式替换
+                    //{
+                    //    "Type": "RegexReplace",     //类型
+                    //    "TargetVariable": "Message",//操作的变量，需要提前在"Variables"定义
+                    //    "Pattern": "^!",            //正则表达式匹配
+                    //    "Replacement": "§c",        //替换掉的字符串
+                    //    "Filter":true               //筛选是否执行
+                    //} 
+                ],
+                "Filter": {
+                    "all_of": [
+                        {
+                            "Path": [
+                                "body",
+                                "properties",
+                                "MessageType"
+                            ],
+                            "Operator": "==",
+                            "Value": "chat"
+                        }
+                    ]
+                    //"Filter"筛选器
+                    //  只有条件返回结果为true才会执行操作(Actions)
+                    //-------------------------------------------------
+                    //可用参数"all_of":[{xxx1},{xxx2}]满足所有子条件才返回true
+                    //可用参数"any_of":[{xxx1},{xxx2}]满足任一子条件就返回true
+                    //支持无限层数嵌套,比如:
+                    //"Filter": {
+                    // "all_of": [ 
+                    // { "Path": [ "body", "properties", "MessageType" ],
+                    //  "Operator": "==",
+                    //  "Value": "chat"},
+                    //  {"any_of":[{"all_of":[true,false]},false,true]}
+                    // ]
+                    //}
+                    //-------------------------------------------------
+                    //条件比较器
+                    //{
+                    //  "Path": ["body","properties","MessageType"],
+                    //     //数值源数据包目录，参考https://minecraft-zh.gamepedia.com/%E6%95%99%E7%A8%8B/WebSocket
+                    //  "Operator": "==",
+                    //      //比较的操作,可选：
+                    //      //"==" "!=" "is" "not" //文字或数值
+                    //      //">" "<" ">=" "<="    //如果为无法转化为数值的文字会直接返回false
+                    //  "Value": "chat"
+                    //      //比较的目标值
+                    //}
+                    //--------------------------------------------------
+                    //变量比较器
+                    //{
+                    //  "Variable": "PlayerName",
+                    //      //注意：需要提前在上边的"Variables"标签下面定义，否则返回控制台返回报错信息
+                    //  "Operator": "==",
+                    //      //比较的操作,可选：
+                    //      //"==" "!=" "is" "not" //文字或数值
+                    //      //">" "<" ">=" "<="    //如果为无法转化为数值的文字会直接返回false
+                    //  "Value": "chat"
+                    //      //比较的目标值
+                    //}
+                },
+                "Actions": [
+                    {
+                        "Target": "console",
+                        "Echo": "玩家%PlayerName%发送了消息:%Message%"
+                    },
+                    {
+                        "Target": "sender",
+                        "CommandRequest": "say §e§'<复读机§'>§b%PlayerName%§a=>§r%Message%"
+                    }
+                    //Target可用参数4个:
+                    //
+                    //"console"=>控制台软件输出信息,
+                    //---配套参数>"Echo":"输出信息"
+                    //
+                    //"sender"=>向这条消息触发的发送者(客户端)发送消息(命令)
+                    //"other"=>向这条消息触发的发送者以外的连接的(客户端)发送消息(命令)
+                    //"all"=>所有连接的客户端
+                    //---配套参数>"CommandRequest":"发送的命令"
+                    //
+                    //%变量名%可以引用变量，注意：需要提前在上边的"Variables"标签下面定义，否则返回null
+                ]
+            }
+        ] /*,
+        "MobKilled": [
+            {
+                "Variables": [],
+                "Operations": [],
+                "Filter":true ,
+                "Actions": [
+                    {
+                        "Target": "sender",
+                        "CommandRequest": "say §e§'<emm§'>§b有人杀生了？!?"
+                    }
+                ]
+            }
+        ],
+        "PlayerJoin": [],
+        "PlayerLeave": [],*/
+        /*"PlayerDied": [
+            {
+                "Variables": [],
+                "Operations": [],
+                "Filter": true,
+                "Actions": [
+                    {
+                        "Target": "sender",
+                        "CommandRequest": "say §e§'<滑稽§'>§b又有人去世了？!?"
+                    }
+                ]
+            }
+        ],
+        "ItemDropped": []*/
+    }
+}

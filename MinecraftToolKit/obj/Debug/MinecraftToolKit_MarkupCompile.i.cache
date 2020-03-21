@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\App.xaml
-11151548125
+10-1142635201
 
-6-464391137
-19-1230167231
-MainWindow.xaml;
+18512162137
+19-1990616859
+MainWindow.xaml;Pages\floatColor.xaml;Pages\hexEdit.xaml;Pages\home.xaml;Pages\servers.xaml;Pages\update.xaml;Pages\websocket.xaml;Pages\welcome.xaml;Pages\whitelistEdit.xaml;TEST.xaml;
 
-True
+False
 

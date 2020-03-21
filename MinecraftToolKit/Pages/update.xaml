@@ -1,0 +1,86 @@
+﻿<Page x:Class="MinecraftToolKit.Pages.update"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MinecraftToolKit.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="500"
+      Title="update">
+
+    <Grid>
+        <TabControl BorderBrush="{x:Null}">
+            <TabItem>
+                <TabItem.Header>
+                    <RadioButton Padding="0" Margin="-5,-3,-5,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="INFO" Style="{StaticResource MaterialDesignTabRadioButton}"/>
+                </TabItem.Header>
+                <materialDesign:Card   Padding="10">
+                    <Grid>
+                        <ScrollViewer   VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                            <ScrollViewer.Content>
+                                <Grid>
+                                    <StackPanel >
+                                        <TextBlock Text="About" HorizontalAlignment="Center" FontSize="40"/>
+                                        <TextBlock Text="作者 gxh" FontSize="20"/>
+                                        <TextBlock Text="Version:0.0.1.b1" FontSize="20" />
+                                        <TextBlock Text="不允许任何方式的转载" Foreground="Red" FontSize="20"/>
+                                        <TextBlock Text="因为种种原因，软件不开源QwQ"  Foreground="Red" FontSize="20"/>
+                                        <TextBlock Text="请务必将本软件用在生产力上，合理使用"  Foreground="Red" FontSize="20"/>
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer.Content>
+                        </ScrollViewer>
+                    </Grid>
+                </materialDesign:Card>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <RadioButton Padding="0" Margin="-5,-3,-5,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Update" Style="{StaticResource MaterialDesignTabRadioButton}"/>
+                </TabItem.Header>
+                <materialDesign:Card  Padding="10">
+                    <Grid>
+                        <ScrollViewer   VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                            <ScrollViewer.Content>
+                                <Grid>
+                                    <StackPanel >
+                                        <TextBlock Text="施工中..." HorizontalAlignment="Center" FontSize="40"/>
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer.Content>
+                        </ScrollViewer>
+                    </Grid>
+                </materialDesign:Card>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <RadioButton Padding="0" Margin="-5,-3,-5,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="External Link" Style="{StaticResource MaterialDesignTabRadioButton}"/>
+                </TabItem.Header>
+                <materialDesign:Card   Padding="10">
+                    <Grid>
+                        <ScrollViewer   VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                            <ScrollViewer.Content>
+                                <Grid>
+                                    <StackPanel >
+                                        <TextBlock Text="..." HorizontalAlignment="Center" FontSize="40"/>
+                                        <Button Content="GitHub" MaxWidth="200" Click="HitHubButton_Click"/>
+                                        <Separator MaxWidth="200"/>
+                                        <Button Content="McBBS" MaxWidth="200"/>
+                                        <Separator MaxWidth="200"/>
+                                        <Button Content="MineBBS" MaxWidth="200"/>
+                                        <Separator MaxWidth="200"/>
+                                        <Button Content="BiliBili" MaxWidth="200"/>
+                                        <Separator MaxWidth="200"/>
+                                        <Button Content="YouTube" MaxWidth="200"/>
+                                        <Separator MaxWidth="200"/>
+                                        <Button Content="Youku" MaxWidth="200"/>
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer.Content>
+                        </ScrollViewer>
+                    </Grid>
+                </materialDesign:Card>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

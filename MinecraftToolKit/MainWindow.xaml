@@ -6,186 +6,231 @@
         xmlns:local="clr-namespace:MinecraftToolKit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+       WindowStyle="None" 
+        Title="Minecraft:BedrockEdition ToolKit by gxh"
+        AllowsTransparency="True"
+          ResizeMode="CanResizeWithGrip"
+       Height="450" Width="800">
     <Window.Resources>
-        <Style x:Key="Buttonclock" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid Width="11">
-                            <Border BorderThickness="1"/>
-                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0.7"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused" Value="True"/>
-                            <Trigger Property="IsDefaulted" Value="True"/>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" TargetName="contentPresenter" Value="1"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="False">
-                                <Setter Property="Opacity" TargetName="contentPresenter" Value="0.7"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Opacity" TargetName="contentPresenter" Value="1"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False"/>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="Buttonmini_minwindow" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <ControlTemplate.Resources>
-                            <Storyboard x:Key="Sbmini1">
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="rectangle">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-                                </ObjectAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
-                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter">
-                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.6"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                            <Storyboard x:Key="Sbmini2">
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="rectangle">
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}"/>
-                                </ObjectAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
-                                    <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter">
-                                    <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0.6"/>
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </ControlTemplate.Resources>
-                        <Grid>
-                            <Rectangle x:Name="rectangle" RadiusX="0" Stroke="{x:Null}" Height="19" Width="26" Visibility="Hidden">
-                                <Rectangle.Fill>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#003099E2" Offset="1"/>
-                                        <GradientStop Color="#67FDFDFD" Offset="0.072"/>
-                                    </LinearGradientBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0.6"/>
-                            <Border BorderBrush="Black" BorderThickness="1" Opacity="0">
-                                <Border.Background>
-                                    <RadialGradientBrush>
-                                        <GradientStop Color="#00000000" Offset="0"/>
-                                        <GradientStop Color="White" Offset="1"/>
-                                    </RadialGradientBrush>
-                                </Border.Background>
+        <ResourceDictionary>
+            <Storyboard x:Key="MenuOpen">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.0" Value="200">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="MenuClose">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.0" Value="40">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Style TargetType="{x:Type ResizeGrip}">
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                            <Border Height="15" Width="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE" >
+                                <materialDesign:PackIcon HorizontalAlignment="Right" Margin="1" VerticalAlignment="Bottom" Height="25" Width="25" Kind="ResizeBottomRight"/>
                             </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="True"/>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard x:Name="Sbmini2_BeginStoryboard" Storyboard="{StaticResource Sbmini2}"/>
-                                </Trigger.ExitActions>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource Sbmini1}"/>
-                                </Trigger.EnterActions>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="False"/>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Margin" TargetName="contentPresenter" Value="0"/>
-                                <Setter Property="Visibility" TargetName="rectangle" Value="Visible"/>
-                                <Setter Property="Fill" TargetName="rectangle">
-                                    <Setter.Value>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#003099E2" Offset="1"/>
-                                            <GradientStop Color="#671F1F1F" Offset="0.072"/>
-                                        </LinearGradientBrush>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False"/>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="Buttonclose_mainwidow" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <ControlTemplate.Resources>
-                            <Storyboard x:Key="sbstory1">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
-                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image">
-                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.6"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                            <Storyboard x:Key="sbstory2">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image">
-                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.6"/>
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
-                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </ControlTemplate.Resources>
-                        <Grid>
-                            <Rectangle x:Name="rectangle" Margin="-12.167,0,0,-9.167" RadiusY="5.5" RadiusX="5" Stroke="#FF379FE6" StrokeThickness="0" Width="Auto" Clip="M12.167,0 L54.167,0 L54.167,20 L12.167,20 z" Opacity="0">
-                                <Rectangle.Fill>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#99D91A1D" Offset="0.396"/>
-                                        <GradientStop Color="#00D91A1D" Offset="0.726"/>
-                                        <GradientStop Color="#7FFE5B5E"/>
-                                        <GradientStop Color="#BFD6070B" Offset="0.104"/>
-                                    </LinearGradientBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <!--<Image Source="/PermissionsDemo;component/image/csmmainwidow_Images/icons92.png" Stretch="None" Height="10" Width="12" Margin="0,0,0,-3" Opacity="1" Visibility="Hidden"/>-->
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  Content="" />
-                            <!--<Image x:Name="image" Margin="0,0,0,-3" Source="/PermissionsDemo;component/image/csmmainwidow_Images/icons85.png" Stretch="None" Width="12" Height="10" Visibility="Visible" Opacity="0.6"/>-->
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused" Value="True"/>
-                            <Trigger Property="IsDefaulted" Value="True"/>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard x:Name="sbstory2_BeginStoryboard" Storyboard="{StaticResource sbstory2}"/>
-                                </Trigger.ExitActions>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource sbstory1}"/>
-                                </Trigger.EnterActions>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="False"/>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Opacity" TargetName="rectangle" Value="0.8"/>
-                                <!--<Setter Property="Margin" TargetName="image" Value="1,0,0,-4"/>-->
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False"/>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="FlatButton" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource MaterialDesignFlatMidBgButton}" >
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                            <Grid>
+                                <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(materialDesign:ShadowAssist.CacheMode)}">
+                                    <Grid>
+                                        <Border Background="{TemplateBinding Background}" 
+                                        CornerRadius="{Binding Path=(materialDesign:ButtonAssist.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        x:Name="border"
+                                        Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ShadowAssist.ShadowDepth), Converter={x:Static materialDesign:ShadowConverter.Instance}}" />
+                                        <ProgressBar x:Name="ProgressBar"
+                                             Style="{DynamicResource MaterialDesignLinearProgressBar}"
+                                             Minimum="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.Minimum)}"
+                                             Maximum="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.Maximum)}"
+                                             Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.IndicatorForeground)}"
+                                             Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.IndicatorBackground)}"
+                                             Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.Value)}"
+                                             IsIndeterminate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.IsIndeterminate)}"
+                                             Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.IsIndicatorVisible), Converter={StaticResource BooleanToVisibilityConverter}}"
+                                             Height="{TemplateBinding Height}"
+                                             Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}, Path=ActualWidth}"
+                                             Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ButtonProgressAssist.Opacity)}"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center">
+                                        </ProgressBar>
+                                    </Grid>
+                                </AdornerDecorator>
+                                <materialDesign:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"
+                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Padding="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <materialDesign:Ripple.Clip>
+                                        <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                            <Binding ElementName="border" Path="ActualWidth" />
+                                            <Binding ElementName="border" Path="ActualHeight" />
+                                            <Binding ElementName="border" Path="CornerRadius" />
+                                            <Binding ElementName="border" Path="BorderThickness" />
+                                        </MultiBinding>
+                                    </materialDesign:Ripple.Clip>
+                                </materialDesign:Ripple>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="border" Property="materialDesign:ShadowAssist.Darken" Value="True" />
+                                    <Setter Property="Background" >
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="AliceBlue" Opacity=".3"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <!--<Setter Property="Opacity" Value=".6"/>-->
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="true">
+                                    <Setter TargetName="border" Property="materialDesign:ShadowAssist.Darken" Value="True" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Opacity" Value=".23"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TabRadioButton"  TargetType="{x:Type RadioButton}" BasedOn="{StaticResource MaterialDesignTabRadioButton}">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RadioButton}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border HorizontalAlignment="Left" Padding="0,0"  x:Name="border" Background="{TemplateBinding Background}" Grid.ColumnSpan="2">
+                                    <materialDesign:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Padding="{TemplateBinding Padding}"
+                                        x:Name="contentPresenter"
+                                        Opacity=".7"  
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Border>
+                                <Border x:Name="SelectionHighlightBorder" Background="{TemplateBinding BorderBrush}" Width="2"
+                                 Visibility="Hidden" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="contentPresenter" Property="Opacity" Value="1"/>
+                                    <Setter TargetName="border" Property="Padding" Value="2,0" />
+                                    <Setter TargetName="SelectionHighlightBorder" Property="Visibility" Value="Visible" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel>
-            <Button Name="test" Click="Test_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Content="TEST" Height="19" Width="31"/>
-        </StackPanel>
-        <StackPanel Margin="10" Grid.Column="1" />
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ToggleButton.Checked" SourceName="ButtonMenuArea">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ToggleButton.Unchecked" SourceName="ButtonMenuArea">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid >
+        <GroupBox  Style="{DynamicResource MaterialDesignGroupBox}" Padding="2,0,2,2" materialDesign:ShadowAssist.ShadowDepth="Depth3" BorderThickness="2">
+            <GroupBox.Header>
+                <materialDesign:ColorZone x:Name="headerColorZone" Mode="PrimaryMid"  Height="33" MouseLeftButtonDown="Move_window_MouseLeftButtonDown">
+                    <DockPanel >
+                        <Button DockPanel.Dock="Right"  Width="33" Margin="0,2,0,0" Style="{DynamicResource FlatButton}" ToolTip="WindowClose"   HorizontalAlignment="Right" VerticalAlignment="Top"   Foreground="White" Click="CloseWindow_Click">
+                            <materialDesign:PackIcon  Kind="Close"  Height="28" Width="28" />
+                        </Button>
+                        <Button DockPanel.Dock="Right"  Width="33" Margin="0,2,0,0" Style="{DynamicResource FlatButton}" ToolTip="WindowMinimize"  HorizontalAlignment="Right" VerticalAlignment="Top"   Foreground="White" Click="MiniWindow_Click">
+                            <materialDesign:PackIcon   Kind="Remove"  Height="28"   Width="28" />
+                        </Button> 
+                        <materialDesign:PopupBox  DockPanel.Dock="Right"   PlacementMode="BottomAndAlignCentres">
+                            <ListBox>
+                                <ListBoxItem Content="About"/>
+                                <ListBoxItem Content="Github"/>
+                            </ListBox>
+                        </materialDesign:PopupBox>
+                        <ToggleButton x:Name="ButtonMenuArea" Cursor="Hand" Style="{DynamicResource MaterialDesignHamburgerToggleButton}"  Margin="1,0,0,0"  Height="36"/>
+                        <TextBlock  VerticalAlignment="Center" Margin="3,0" TextAlignment="Center" Text="{Binding Title, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+            </GroupBox.Header>
+            <Grid Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding ElementName=GridMenu,Path=ActualWidth}"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="Frame" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"  Grid.Column="1"/>
+                <Grid x:Name="GridMenu" Width="40" HorizontalAlignment="Left" Background="#FF1B3861" Margin="0,0,0,-0.333">
+                    <StackPanel>
+                        <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonHome_Checked" >
+                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
+                                    <materialDesign:PackIcon Foreground="White" Kind="ViewDashboard" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                    <TextBlock Text="Home Page" Foreground="White" VerticalAlignment="Center" Margin="20,0"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonServers_Checked">
+                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
+                                    <materialDesign:PackIcon Foreground="White"  Kind="Wifi" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                    <TextBlock Text="Servers" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonHexEdit_Checked">
+                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
+                                    <materialDesign:PackIcon Foreground="White"  Kind="Pencil" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                    <TextBlock Text="Hex Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonWhitelistEdit_Checked">
+                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
+                                    <materialDesign:PackIcon Foreground="White"  Kind="PersonEdit" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                    <TextBlock Text="whitelist.json Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonFloatColor_Checked">
+                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
+                                    <materialDesign:PackIcon Foreground="White"  Kind="ColorLens" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                    <TextBlock Text="Float Color Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonWebsocket_Checked">
+                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
+                                    <materialDesign:PackIcon Foreground="White"  Kind="LanConnect" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                    <TextBlock Text="Websocket Server" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonGithub_Checked">
+                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
+                                    <materialDesign:PackIcon Foreground="White"  Kind="GithubBox" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                    <TextBlock Text="About" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                </StackPanel>
+                            </RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -20,14 +21,79 @@ namespace MinecraftToolKit
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region 窗体
         public MainWindow()
         {
             InitializeComponent();
+            Frame.Navigate(new Pages.welcome());
+        }
+        private void Move_window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Frame.IsEnabled = false;
+            headerColorZone.Cursor = Cursors.SizeAll;
+            try { DragMove(); }
+            catch { }
+            Frame.IsEnabled = true;
+            headerColorZone.Cursor = Cursors.Arrow;
+        }
+        #endregion
+        private void MiniWindow_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
-        {//C:\Users\gaoxi\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftpe
-            test.Content = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftpe\external_servers.txt";
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new PopUpAndNav.MainWindow();
+            window.Show();
+        }
+
+        private void LoadPage(Page page)
+        {
+
+            if ((Page)Frame.Content is Pages.Websocket)
+            {
+                ((Pages.Websocket)Frame.Content).UnInstall();
+            }
+            ((Page)Frame.Content).Content = null;
+            Frame.Navigate(page);
+        }
+        private void TabRadioButtonHome_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.home());
+        }
+        private void TabRadioButtonServers_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.Servers());
+        }
+        private void TabRadioButtonHexEdit_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.HexEdit());
+        }
+        private void TabRadioButtonUpdate_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.update());
+        }
+        private void TabRadioButtonGithub_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.update());
+        }
+        private void TabRadioButtonWebsocket_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.Websocket());
+        }
+        private void TabRadioButtonFloatColor_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.floatColor());
+        }
+        private void TabRadioButtonWhitelistEdit_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.whitelistEdit());
         }
     }
 }
