@@ -47,11 +47,7 @@ namespace MinecraftToolKit
             Application.Current.Shutdown();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Window window = new PopUpAndNav.MainWindow();
-            window.Show();
-        }
+
 
         private void LoadPage(Page page)
         {
@@ -95,5 +91,16 @@ namespace MinecraftToolKit
         {
             LoadPage(new Pages.whitelistEdit());
         }
+
+        private void MaxSizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            WindowSize.Kind = WindowState == WindowState.Maximized ? MaterialDesignThemes.Wpf.PackIconKind.ArrowCompress : MaterialDesignThemes.Wpf.PackIconKind.Add;
+            //BorderGroupBox.Margin = WindowState == WindowState.Maximized ? new Thickness(6) : new Thickness(0);
+         }
     }
 }

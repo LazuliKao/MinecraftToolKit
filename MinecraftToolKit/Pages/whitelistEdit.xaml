@@ -7,8 +7,78 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="whitelistEdit">
-
+    <Page.Resources>
+        <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+            <Setter Property="Background" Value="AliceBlue"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        <TextBlock FontSize="30" Text="Haven't finished yet!!!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu HorizontalAlignment="Left"   VerticalAlignment="Top" FontSize="18" Background="{x:Null}">
+            <MenuItem Header="文件" Background="{x:Null}">
+                <MenuItem x:Name="open_whitelist_json" Header="打开whitelist.json" Height="30">
+                    <MenuItem x:Name="open_json" Height="30" Header="选择路径" Click="Open_json_Click" />
+                </MenuItem>
+                <MenuItem x:Name="open_whitelist_text" Header="打开.txt玩家列表" Height="30">
+                    <MenuItem x:Name="open_txt" Height="30" Header="选择路径" Click="Open_text_Click" />
+                </MenuItem> 
+                <MenuItem x:Name="save_whitelist_json" Header="保存whitelist.json" Height="30" GotFocus="Save_whitelist_json_GotFocus">
+                    <MenuItem x:Name="save_json" Height="30" Header="保存" Click="Save_json_Click" />
+                    <MenuItem x:Name="save_to_json" Height="30" Header="另存为" Click="Save_to_json_Click" />
+                </MenuItem> 
+                <MenuItem x:Name="save_whitelist_text" Header="保存.txt玩家列表" Height="30" GotFocus="Save_whitelist_text_GotFocus">
+                    <MenuItem x:Name="save_txt" Height="30" Header="保存" Click="Save_txt_Click" />
+                    <MenuItem x:Name="save_to_txt" Height="30" Header="另存为" Click="Save_to_txt_Click" />
+                </MenuItem> 
+            </MenuItem>
+            <MenuItem Header="设置"  Background="{x:Null}">
+                <CheckBox x:Name="ignores_player_limit" Content="忽略玩家上限" Height="30" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+                <CheckBox x:Name="OneLine" Content="压缩成一行" Height="30" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+            </MenuItem>
+            <MenuItem Header="关于"  Background="{x:Null}">
+                <MenuItem Header="MCBBS" Height="30" Click="MCBBS_Click"/>
+                <MenuItem Header="Github" Height="30" Click="Github_Click" />
+            </MenuItem>
+
+        </Menu>
+        <Grid Margin="8" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions> 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="玩家名（一行一个或&quot;;&quot;间隔）"   FontSize="20"/>
+                <RichTextBox x:Name="inputName"    Block.LineHeight="1" AutomationProperties.HelpText="输入玩家ID，一行一个" Grid.Row ="2" />
+            </Grid>
+            <Grid Margin="5,5,5,5" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions> 
+                <Button x:Name="转换"   Content="&gt;&gt;&gt;转换&gt;&gt;&gt;"     FontSize="18" Click="转换_Click" Height="Auto"  BorderBrush="Blue"/>
+                <Grid  Grid.Row ="1" Margin="5">
+                    <RichTextBox x:Name="statistics"   Block.LineHeight="1" AutomationProperties.HelpText="输入玩家ID，一行一个" Background="{x:Null}"/>
+                    <Label Content="统计信息" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="20"  Foreground="#FFBFBFBF" Background="{x:Null}"  />
+                </Grid>
+                <Button x:Name="提取"   Content="&lt;&lt;&lt;提取&lt;&lt;&lt;"  FontSize="18" Click="提取_Click" Background="#FF71D81B" BorderBrush="Green"  Grid.Row="2" Height="Auto"/>
+            </Grid>
+            <Grid Margin="5,5,5,5" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="BDS白名单json文本"  FontSize="20"/>
+                <RichTextBox x:Name="outputJson"   Block.LineHeight="1" AutomationProperties.HelpText="输出json" Grid.Row="2" />
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

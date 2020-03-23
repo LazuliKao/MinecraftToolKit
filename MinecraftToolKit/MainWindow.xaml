@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MinecraftToolKit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:Elements.Converters"
         mc:Ignorable="d"
        WindowStyle="None" 
         Title="Minecraft:BedrockEdition ToolKit by gxh"
         AllowsTransparency="True"
+        SizeChanged="Window_SizeChanged"
           ResizeMode="CanResizeWithGrip"
+        Background="{x:Null}"
        Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
@@ -130,7 +133,7 @@
                                         Opacity=".7"  
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 </Border>
-                                <Border x:Name="SelectionHighlightBorder" Background="{TemplateBinding BorderBrush}" Width="2"
+                                <Border x:Name="SelectionHighlightBorder" Background="{TemplateBinding BorderBrush}" Width="3"
                                  Visibility="Hidden" />
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -144,6 +147,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <converters:MainWinRectangle x:Key="MainWinRectangle" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.Triggers>
@@ -153,18 +157,24 @@
         <EventTrigger RoutedEvent="ToggleButton.Unchecked" SourceName="ButtonMenuArea">
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
         </EventTrigger>
+        <!--<EventTrigger RoutedEvent="ToggleButton.Unchecked" SourceName="WindowSize">
+          <tr
+        </EventTrigger>-->
     </Window.Triggers>
-    <Grid >
-        <GroupBox  Style="{DynamicResource MaterialDesignGroupBox}" Padding="2,0,2,2" materialDesign:ShadowAssist.ShadowDepth="Depth3" BorderThickness="2">
+    <Grid x:Name="BorderGroupBox" Margin="7">
+        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"  Padding="2,0,2,2" materialDesign:ShadowAssist.ShadowDepth="Depth3" Background="White"   >
             <GroupBox.Header>
                 <materialDesign:ColorZone x:Name="headerColorZone" Mode="PrimaryMid"  Height="33" MouseLeftButtonDown="Move_window_MouseLeftButtonDown">
                     <DockPanel >
                         <Button DockPanel.Dock="Right"  Width="33" Margin="0,2,0,0" Style="{DynamicResource FlatButton}" ToolTip="WindowClose"   HorizontalAlignment="Right" VerticalAlignment="Top"   Foreground="White" Click="CloseWindow_Click">
                             <materialDesign:PackIcon  Kind="Close"  Height="28" Width="28" />
                         </Button>
+                        <Button DockPanel.Dock="Right" Width="33" Margin="0,2,0,0" Style="{DynamicResource FlatButton}" ToolTip="WindowSize"  HorizontalAlignment="Right" VerticalAlignment="Top"   Foreground="White" Click="MaxSizeButton_Click" >
+                            <materialDesign:PackIcon x:Name="WindowSize"  Kind="WindowMaximize"  Height="28"   Width="28" />
+                        </Button>
                         <Button DockPanel.Dock="Right"  Width="33" Margin="0,2,0,0" Style="{DynamicResource FlatButton}" ToolTip="WindowMinimize"  HorizontalAlignment="Right" VerticalAlignment="Top"   Foreground="White" Click="MiniWindow_Click">
                             <materialDesign:PackIcon   Kind="Remove"  Height="28"   Width="28" />
-                        </Button> 
+                        </Button>
                         <materialDesign:PopupBox  DockPanel.Dock="Right"   PlacementMode="BottomAndAlignCentres">
                             <ListBox>
                                 <ListBoxItem Content="About"/>
@@ -176,60 +186,63 @@
                     </DockPanel>
                 </materialDesign:ColorZone>
             </GroupBox.Header>
-            <Grid Margin="0,0,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{Binding ElementName=GridMenu,Path=ActualWidth}"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Frame x:Name="Frame" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"  Grid.Column="1"/>
-                <Grid x:Name="GridMenu" Width="40" HorizontalAlignment="Left" Background="#FF1B3861" Margin="0,0,0,-0.333">
-                    <StackPanel>
-                        <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonHome_Checked" >
-                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
-                                    <materialDesign:PackIcon Foreground="White" Kind="ViewDashboard" Width="24" Height="24"   VerticalAlignment="Center"/>
-                                    <TextBlock Text="Home Page" Foreground="White" VerticalAlignment="Center" Margin="20,0"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonServers_Checked">
-                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
-                                    <materialDesign:PackIcon Foreground="White"  Kind="Wifi" Width="24" Height="24"   VerticalAlignment="Center"/>
-                                    <TextBlock Text="Servers" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonHexEdit_Checked">
-                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
-                                    <materialDesign:PackIcon Foreground="White"  Kind="Pencil" Width="24" Height="24"   VerticalAlignment="Center"/>
-                                    <TextBlock Text="Hex Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonWhitelistEdit_Checked">
-                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
-                                    <materialDesign:PackIcon Foreground="White"  Kind="PersonEdit" Width="24" Height="24"   VerticalAlignment="Center"/>
-                                    <TextBlock Text="whitelist.json Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonFloatColor_Checked">
-                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
-                                    <materialDesign:PackIcon Foreground="White"  Kind="ColorLens" Width="24" Height="24"   VerticalAlignment="Center"/>
-                                    <TextBlock Text="Float Color Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonWebsocket_Checked">
-                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
-                                    <materialDesign:PackIcon Foreground="White"  Kind="LanConnect" Width="24" Height="24"   VerticalAlignment="Center"/>
-                                    <TextBlock Text="Websocket Server" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonGithub_Checked">
-                                <StackPanel Orientation="Horizontal" Margin="7.5,0" Width="200">
-                                    <materialDesign:PackIcon Foreground="White"  Kind="GithubBox" Width="24" Height="24"   VerticalAlignment="Center"/>
-                                    <TextBlock Text="About" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
-                                </StackPanel>
-                            </RadioButton>
+            <Grid >
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding ElementName=GridMenu,Path=ActualWidth}"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame x:Name="Frame" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"  Grid.Column="1"/>
+                    <Grid x:Name="GridMenu" Width="40" HorizontalAlignment="Left" Background="#FF1B3861" Margin="0,0,0,-0.333">
+                        <StackPanel>
+                            <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonHome_Checked" >
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White" Kind="ViewDashboard" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="Home Page" Foreground="White" VerticalAlignment="Center" Margin="20,0"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonServers_Checked">
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White"  Kind="Wifi" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="Servers" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonHexEdit_Checked">
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White"  Kind="Pencil" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="Hex Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonWhitelistEdit_Checked">
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White"  Kind="PersonEdit" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="whitelist.json Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonFloatColor_Checked">
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White"  Kind="ColorLens" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="Float Color Editor" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonWebsocket_Checked">
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White"  Kind="LanConnect" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="Websocket Server" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonGithub_Checked">
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White"  Kind="GithubBox" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="About" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                    </StackPanel>
+                                </RadioButton>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
+                    </Grid>
                 </Grid>
+                <Border  BorderBrush="{Binding IsActive, Converter={StaticResource MainWinRectangle}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" BorderThickness="2,0,2,2" Margin="-2,0,-2,-2"/>
             </Grid>
         </GroupBox>
     </Grid>

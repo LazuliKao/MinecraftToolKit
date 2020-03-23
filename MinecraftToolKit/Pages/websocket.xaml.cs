@@ -29,16 +29,35 @@ namespace MinecraftToolKit.Pages
         public Websocket()
         {
             InitializeComponent();
+            _ = GetConfig();
+            allScokets = new List<IWebSocketConnection>();
         }
         public void OutPut(string text)
         {
             Dispatcher.Invoke(() => OutPutRichTextBox.AppendText(DateTime.Now.ToString("s") + ">" + text + Environment.NewLine));
-            LogWriter.WriteLine(DateTime.Now.ToString("s") + ">" + text);
+            WriteLog(DateTime.Now.ToString("s") + ">" + text);
         }
-        private TextWriter LogWriter = File.AppendText(Environment.CurrentDirectory + "\\websocket.log");
+        private Queue<string> textWT = new Queue<string>();
+        Task writeTask = Task.Run(() => { });
         private void WriteLog(string text)
         {
-            _ = LogWriter.WriteLineAsync(text);
+            textWT.Enqueue(text+Environment.NewLine);
+            if (writeTask.IsCompleted)
+            {
+                writeTask = Task.Run(() =>
+                 {
+                     try
+                     {
+                         while (textWT.Count > 0)
+                         {
+                             File.AppendAllText(Environment.CurrentDirectory + "\\websocket.log", textWT.Peek());
+                             textWT.Dequeue();
+                         }
+                     }
+                     catch (Exception)
+                     { return; }
+                 });
+            }
         }
         public List<IWebSocketConnection> allScokets = new List<IWebSocketConnection>();
         public WebSocketServer server;
@@ -52,6 +71,7 @@ namespace MinecraftToolKit.Pages
                     File.WriteAllBytes(Environment.CurrentDirectory + "\\ws_config.json", Res.ws_config);
                 }
                 ws_config = JObject.Parse(File.ReadAllText(Environment.CurrentDirectory + "\\ws_config.json"));
+                configFile.Text += Environment.CurrentDirectory + "\\ws_config.json";
             }
             return ws_config;
         }
@@ -267,6 +287,8 @@ namespace MinecraftToolKit.Pages
             try
             {
                 foreach (var item in allScokets) { item.Close(); }
+                server.ListenerSocket.Close();
+                server.ListenerSocket.Dispose();
                 server.Dispose();
                 allScokets.Clear();
                 SelectedServer.Items.Clear();
@@ -405,5 +427,17 @@ namespace MinecraftToolKit.Pages
         }
         #endregion 
         private string CreateUUID() => Guid.NewGuid().ToString();
-    }
+
+        private void EditConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(Environment.CurrentDirectory);
+        }
+
+        private void EditOpenButton_Click(object sender, RoutedEventArgs e)
+        {
+          
+            EditDialog.IsOpen = true;
+        }
+
+     }
 }

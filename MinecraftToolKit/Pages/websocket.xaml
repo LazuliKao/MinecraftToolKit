@@ -12,19 +12,21 @@
     <Page.Resources>
         <ResourceDictionary>
             <converters:SelectedToBool x:Key="SelectedToBool" />
+            <converters:DialogHeightByOpen x:Key="DialogHeightByOpen" />
         </ResourceDictionary>
     </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
-            <RowDefinition Height="135"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
         <RichTextBox Margin="8,8,8,2" x:Name="OutPutRichTextBox" Block.LineHeight="1" TextChanged="OutPutRichTextBox_TextChanged"/>
         <TabControl  Grid.Row="1" Background="{x:Null}" Margin="5" BorderBrush="{x:Null}">
             <TabItem  Background="{x:Null}" HorizontalAlignment="Left" BorderBrush="{x:Null}"  >
                 <TabItem.Header >
-                    <RadioButton Padding="0" Margin="-5,-3,-5,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Command" Style="{StaticResource MaterialDesignTabRadioButton}"/>
+                    <RadioButton Padding="0" Margin="0,-3,0,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Command" Style="{StaticResource MaterialDesignTabRadioButton}"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -33,8 +35,8 @@
                     </Grid.ColumnDefinitions>
                     <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"   x:Name="SendText"  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" 
                  AcceptsReturn="True"  materialDesign:HintAssist.Hint="Enter your command text here !"  />
-                    <Grid Margin="5,-2,3,0" Grid.Column="1"  >
-                        <ComboBox VerticalAlignment="Top" x:Name="SelectedServer" materialDesign:HintAssist.Hint="Client" materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    <StackPanel Margin="5,-2,3,0" Grid.Column="1"  >
+                        <ComboBox VerticalAlignment="Top" Margin="0,0,0,19" x:Name="SelectedServer" materialDesign:HintAssist.Hint="Client" materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                     materialDesign:HintAssist.HelperText="Select server to send">
                             <!--materialDesign:TextFieldAssist.SuffixText=""-->
                         </ComboBox>
@@ -51,12 +53,12 @@
                                 <materialDesign:PackIcon Kind="Send"/>
                             </Button>
                         </Grid>
-                    </Grid>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem  Background="{x:Null}" BorderBrush="{x:Null}" >
                 <TabItem.Header>
-                    <RadioButton Padding="0" Margin="-5,-3,-5,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Message" Style="{StaticResource MaterialDesignTabRadioButton}"/>
+                    <RadioButton Padding="0" Margin="0,-3,0,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Message" Style="{StaticResource MaterialDesignTabRadioButton}"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -93,16 +95,137 @@
             </TabItem>
             <TabItem  Background="{x:Null}" BorderBrush="{x:Null}" >
                 <TabItem.Header>
-                    <RadioButton Padding="0" Margin="-5,-3,-5,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Triggers" Style="{StaticResource MaterialDesignTabRadioButton}"/>
+                    <RadioButton Padding="0" Margin="0,-3,0,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Triggers" Style="{StaticResource MaterialDesignTabRadioButton}"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="26"/>
-                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBox x:Name="configFile" Text="config file location:" Margin="0,0,70,0"/>
-                    <Button Content="Edit"   HorizontalAlignment="Right"/>
-                    <Button  Content="It will be weitten complete in Next Next Next version..." Margin="0,8.667,0.333,27" Grid.Row="1"/>
+                    <TextBox x:Name="configFile" VerticalAlignment="Center" IsReadOnly="True" Text="config file location:" Margin="0,0,70,0"/>
+                    <Button Content="Edit"   HorizontalAlignment="Right" Click="EditConfigButton_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem  Background="{x:Null}" BorderBrush="{x:Null}" >
+                <TabItem.Header>
+                    <RadioButton Padding="0" Margin="0,-3,0,-3" IsChecked="{Binding Parent.IsSelected, RelativeSource={RelativeSource Self}}" Content="Advanced Build" Style="{StaticResource MaterialDesignTabRadioButton}"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer MaxHeight="200" VerticalScrollBarVisibility="Auto">
+                                <TextBlock TextWrapping="Wrap" />
+                            </ScrollViewer>
+                            <Button  Content="Perform" Margin="5,0" Grid.Column="1"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button  Content="Edit" Margin="5,0" Click="EditOpenButton_Click"/>
+                            <Button  Content="Save" Margin="5,0" Grid.Column="1" />
+                            <Button  Content="Import" Margin="5,0" Grid.Column="2"/>
+                        </Grid>
+                    </Grid>
+                    <materialDesign:DialogHost x:Name="EditDialog"  Height="0" IsOpen="True" >
+                        <materialDesign:DialogHost.Triggers>
+                            <EventTrigger  RoutedEvent="materialDesign:DialogHost.DialogOpened">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)"  >
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="200">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseIn"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger  RoutedEvent="materialDesign:DialogHost.DialogClosing">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)"  >
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </materialDesign:DialogHost.Triggers>
+                        <materialDesign:DialogHost.DialogContent>
+                            <StackPanel   Margin="10" >
+                                <TabControl BorderBrush="{x:Null}" Background="AliceBlue">
+                                    <TabItem Header="Square">
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Start Point" VerticalAlignment="Center" Width="80" FontSize="15"/>
+                                                <TextBlock Text="x:" VerticalAlignment="Center"/>
+                                                <TextBox MinWidth="20" Text="233" />
+                                                <TextBlock Text="y:" VerticalAlignment="Center"/>
+                                                <TextBox MinWidth="20" Text="233" />
+                                                <TextBlock Text="z:" VerticalAlignment="Center"/>
+                                                <TextBox MinWidth="20" Text="233" />
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text=" End Point" VerticalAlignment="Center"  Width="80" FontSize="15"/>
+                                                <TextBlock Text="x:" VerticalAlignment="Center"/>
+                                                <TextBox MinWidth="20" Text="233" />
+                                                <TextBlock Text="y:" VerticalAlignment="Center"/>
+                                                <TextBox MinWidth="20" Text="233" />
+                                                <TextBlock Text="z:" VerticalAlignment="Center"/>
+                                                <TextBox MinWidth="20" Text="233" />
+                                            </StackPanel>
+                                            <Separator Height="5"/>
+                                            <!-- the following based on https://material.io/guidelines/components/buttons.html#buttons-toggle-buttons -->
+                                            <ListBox Style="{StaticResource MaterialDesignToolToggleListBox}" SelectedIndex="0">
+                                                <ListBoxItem>
+                                                    <materialDesign:PackIcon  Kind="FormatAlignLeft" />
+                                                </ListBoxItem>
+                                                <ListBoxItem>
+                                                    <materialDesign:PackIcon   Kind="FormatAlignCenter" />
+                                                </ListBoxItem>
+                                                <ListBoxItem>
+                                                    <materialDesign:PackIcon   Kind="FormatAlignRight" />
+                                                </ListBoxItem>
+                                                <ListBoxItem>
+                                                    <materialDesign:PackIcon Kind="FormatAlignJustify" />
+                                                </ListBoxItem>
+                                            </ListBox>
+                                            <Button/>
+                                        </StackPanel>
+                                    </TabItem>
+                                    <TabItem Header="Round">
+                                        <Button Content="2"/>
+                                    </TabItem>
+                                </TabControl>
+                                <Separator Height="15"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="Cancel" Command="materialDesign:DialogHost.CloseDialogCommand"/>
+                                    <Button Content="Confirm" Command="materialDesign:DialogHost.CloseDialogCommand" Grid.Column="2"/>
+                                </Grid>
+                            </StackPanel>
+                        </materialDesign:DialogHost.DialogContent>
+                    </materialDesign:DialogHost>
                 </Grid>
             </TabItem>
         </TabControl>
