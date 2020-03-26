@@ -209,7 +209,7 @@ IF EXIST $(TargetDir)Newtonsoft.Json.xml DEL $(TargetDir)Newtonsoft.Json.xml
 IF EXIST $(TargetDir)MinecraftToolKit.exe.config DEL $(TargetDir)MinecraftToolKit.exe.config
 IF EXIST $(TargetDir)MinecraftToolKit.pdb DEL $(TargetDir)MinecraftToolKit.pdb
 IF EXIST $(TargetDir)MahApps.Metro.xml DEL $(TargetDir)MahApps.Metro.xml
-IF EXIST $(TargetPath) COPY $(TargetPath) $(TargetDir)$(TargetName)V0.0.1$(TargetExt)
+IF EXIST $(TargetPath) COPY $(TargetPath) $(TargetDir)$(TargetName)V0.0.2$(TargetExt)
 </PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" />

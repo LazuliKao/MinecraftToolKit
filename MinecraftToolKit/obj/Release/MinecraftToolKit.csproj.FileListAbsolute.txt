@@ -36,3 +36,5 @@ C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Minecr
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.csproj.CopyComplete
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.exe
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.pdb
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.Res.resources
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.csproj.CoreCompileInputs.cache

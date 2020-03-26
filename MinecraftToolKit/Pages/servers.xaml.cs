@@ -107,14 +107,12 @@ namespace MinecraftToolKit.Pages
                     Data[index].Description = System.Text.RegularExpressions.Regex.Replace(get[InfoList.description], @"§[A-Za-z\d]", "");
                     Data[index].OnlinePlayer = get[InfoList.onlineplayers] + "/" + get[InfoList.maxPlayers];
                     Data[index].Version = get[InfoList.connectionVer] + ":MCBE" + get[InfoList.gameVer];
-
                 }
                 catch (Exception)
                 {
                     Data[index].Description = "无法连接至世界...";
                     Data[index].OnlinePlayer = "...";
                     Data[index].Version = "...";
-
                 }
                 Dispatcher.Invoke(() => infoPanel.Items.Refresh());
             });

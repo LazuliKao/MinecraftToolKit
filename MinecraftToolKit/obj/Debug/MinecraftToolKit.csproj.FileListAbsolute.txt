@@ -37,3 +37,12 @@ C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Debug\Minecraf
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Debug\MinecraftToolKit.pdb
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Debug\MinecraftToolKit.csprojAssemblyReference.cache
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Debug\MinecraftToolKit.Res.resources
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Converters.Wpf.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Core.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Css.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Dom.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Model.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Rendering.Gdi.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Rendering.Wpf.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Debug\SharpVectors.Runtime.Wpf.xml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Debug\MinecraftToolKit.csproj.CoreCompileInputs.cache

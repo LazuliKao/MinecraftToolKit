@@ -39,7 +39,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ResizeGrip}">
-                            <Border Height="15" Width="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE" >
+                            <Border Height="15" Width="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE" Margin="7">
                                 <materialDesign:PackIcon HorizontalAlignment="Right" Margin="1" VerticalAlignment="Bottom" Height="25" Width="25" Kind="ResizeBottomRight"/>
                             </Border>
                         </ControlTemplate>
@@ -161,7 +161,7 @@
           <tr
         </EventTrigger>-->
     </Window.Triggers>
-    <Grid x:Name="BorderGroupBox" Margin="7">
+    <Grid x:Name="BorderGroupBox" Margin="6">
         <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"  Padding="2,0,2,2" materialDesign:ShadowAssist.ShadowDepth="Depth3" Background="White"   >
             <GroupBox.Header>
                 <materialDesign:ColorZone x:Name="headerColorZone" Mode="PrimaryMid"  Height="33" MouseLeftButtonDown="Move_window_MouseLeftButtonDown">

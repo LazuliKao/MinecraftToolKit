@@ -9,9 +9,13 @@
       Title="servers">
 
     <Grid>
-        <StackPanel>
-            <TextBox x:Name="FilePathTextBox"  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextFieldTextBoxEnabledComboBox}" TextWrapping="Wrap" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="18*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="FilePathTextBox"  Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"  
+             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextFieldTextBoxEnabledComboBox}" TextWrapping="Wrap"   >
                 <materialDesign:HintAssist.Hint>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Servers-list File's path of Minectaft UWP" FontSize="20"/>
@@ -19,7 +23,7 @@
                     </StackPanel>
                 </materialDesign:HintAssist.Hint>
             </TextBox>
-            <DataGrid VerticalAlignment="Top" x:Name="infoPanel"  IsReadOnly="True" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False" materialDesign:DataGridAssist.CellPadding="0,5,0,5" materialDesign:DataGridAssist.ColumnHeaderPadding="0,8,0,8" FontSize="16" FontFamily="Microsoft YaHei" >
+            <DataGrid VerticalAlignment="Top" x:Name="infoPanel"  IsReadOnly="True" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False" materialDesign:DataGridAssist.CellPadding="0,5,0,5" materialDesign:DataGridAssist.ColumnHeaderPadding="0,8,0,8" FontSize="16" FontFamily="Microsoft YaHei"   Margin="2" Grid.Row="1" >
                 <DataGrid.Columns >
                     <DataGridTextColumn  Binding="{Binding Order}" Header="#"  Width="30" />
                     <DataGridTextColumn Binding="{Binding ServerName}" Header="ServerName" Width="90"  />
@@ -31,6 +35,6 @@
                     <DataGridTextColumn Binding="{Binding LastEditTime}" Header="LastEditTime" />
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Page>
