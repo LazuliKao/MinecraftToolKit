@@ -13,7 +13,6 @@ C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\websocket.g.cs
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\welcome.g.cs
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\whitelistEdit.g.cs
-C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\TEST.g.cs
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\App.g.cs
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\GeneratedInternalTypeHelper.g.cs
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit_MarkupCompile.cache
@@ -28,7 +27,6 @@ C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\websocket.baml
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\welcome.baml
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\whitelistEdit.baml
-C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\TEST.baml
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.g.resources
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.Properties.Resources.resources
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.csproj.GenerateResource.cache
@@ -38,3 +36,6 @@ C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Minecr
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.pdb
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.Res.resources
 C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\MinecraftToolKit.csproj.CoreCompileInputs.cache
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\tesws.g.cs
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\obj\Release\Pages\tesws.baml
+C:\Users\gaoxi\source\repos\MinecraftToolKit\MinecraftToolKit\bin\Release\websocket-sharp.xml

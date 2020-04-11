@@ -572,21 +572,42 @@ namespace MinecraftToolKit.Pages
                     List<Point> points = new List<Point>();
                     Dictionary<Point, Point> buildPoints = new Dictionary<Point, Point>();
                     #region Func
+                    bool add0dot5Fix =RoundModeToggle.IsChecked == true;
                     void AddPoint(int x, int y)
                     {
-                        if (RoundFillMode.SelectedIndex == 0)//fill
-                        {
-                            if (!buildPoints.ContainsKey(new Point(x, y))) { buildPoints.Add(new Point(x, y), new Point(x, -y)); }
-                            if (!buildPoints.ContainsKey(new Point(-x, y))) { buildPoints.Add(new Point(-x, y), new Point(-x, -y)); }
-                            if (!buildPoints.ContainsKey(new Point(y, x))) { buildPoints.Add(new Point(y, x), new Point(y, -x)); }
-                            if (!buildPoints.ContainsKey(new Point(-y, x))) { buildPoints.Add(new Point(-y, x), new Point(-y, -x)); }
+                        if (add0dot5Fix)
+                        { 
+                            if (RoundFillMode.SelectedIndex == 0)//fill
+                            {
+                                if (!buildPoints.ContainsKey(new Point(x + 1, y + 1))) { buildPoints.Add(new Point(x + 1, y + 1), new Point(x + 1, -y)); }
+                                if (!buildPoints.ContainsKey(new Point(-x, y + 1))) { buildPoints.Add(new Point(-x, y + 1), new Point(-x, -y)); }
+                                if (!buildPoints.ContainsKey(new Point(y + 1, x + 1))) { buildPoints.Add(new Point(y + 1, x + 1), new Point(y + 1, -x)); }
+                                if (!buildPoints.ContainsKey(new Point(-y, x + 1))) { buildPoints.Add(new Point(-y, x + 1), new Point(-y, -x)); }
+                            }
+                            else
+                            {
+                                points.Add(new Point(x + 1, y + 1)); points.Add(new Point(y + 1, x + 1));
+                                points.Add(new Point(-x, y + 1)); points.Add(new Point(-y, x + 1));
+                                points.Add(new Point(x + 1, -y)); points.Add(new Point(y + 1, -x));
+                                points.Add(new Point(-x, -y)); points.Add(new Point(-y, -x));
+                            }
                         }
                         else
                         {
-                            points.Add(new Point(x, y)); points.Add(new Point(y, x));
-                            points.Add(new Point(-x, y)); points.Add(new Point(-y, x));
-                            points.Add(new Point(x, -y)); points.Add(new Point(y, -x));
-                            points.Add(new Point(-x, -y)); points.Add(new Point(-y, -x));
+                            if (RoundFillMode.SelectedIndex == 0)//fill
+                            {
+                                if (!buildPoints.ContainsKey(new Point(x, y))) { buildPoints.Add(new Point(x, y), new Point(x, -y)); }
+                                if (!buildPoints.ContainsKey(new Point(-x, y))) { buildPoints.Add(new Point(-x, y), new Point(-x, -y)); }
+                                if (!buildPoints.ContainsKey(new Point(y, x))) { buildPoints.Add(new Point(y, x), new Point(y, -x)); }
+                                if (!buildPoints.ContainsKey(new Point(-y, x))) { buildPoints.Add(new Point(-y, x), new Point(-y, -x)); }
+                            }
+                            else
+                            {
+                                points.Add(new Point(x, y)); points.Add(new Point(y, x));
+                                points.Add(new Point(-x, y)); points.Add(new Point(-y, x));
+                                points.Add(new Point(x, -y)); points.Add(new Point(y, -x));
+                                points.Add(new Point(-x, -y)); points.Add(new Point(-y, -x));
+                            }
                         }
                     }
                     void Bresenham_Circle(int r)
@@ -939,5 +960,6 @@ namespace MinecraftToolKit.Pages
         {
 
         }
+
     }
 }

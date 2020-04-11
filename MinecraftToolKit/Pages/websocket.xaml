@@ -144,7 +144,7 @@
                                 <Button  Content="Import" Margin="5,0" Grid.Column="2" Click="ImportMCFButton_Click"/>
                             </Grid>
                         </Grid>
-                        <materialDesign:DialogHost x:Name="EditDialog"  Height="0" IsOpen="False" >
+                        <materialDesign:DialogHost   x:Name="EditDialog"  Height="0"   >
                             <materialDesign:DialogHost.Triggers>
                                 <EventTrigger  RoutedEvent="materialDesign:DialogHost.DialogOpened">
                                     <BeginStoryboard>
@@ -221,10 +221,10 @@
                                                 <DockPanel Visibility="Collapsed" Name="SquareSurfacePanel" HorizontalAlignment="Center" Margin="0,7,0,0" >
                                                     <TextBlock Text="Include Surface" VerticalAlignment="Center"/>
                                                     <ListBox Margin="8,0,0,0" Style="{StaticResource MaterialDesignToolToggleListBox}" SelectionMode="Multiple" Name="SquareIncludeSurface">
-                                                        <ListBoxItem Content="右" IsSelected="True"/>
+                                                        <ListBoxItem Content="左" IsSelected="True"/>
                                                         <ListBoxItem Content="上" IsSelected="True"/>
                                                         <ListBoxItem Content="前" IsSelected="True"/>
-                                                        <ListBoxItem Content="左" IsSelected="True"/>
+                                                        <ListBoxItem Content="右" IsSelected="True"/>
                                                         <ListBoxItem Content="后" IsSelected="True"/>
                                                         <ListBoxItem Content="下" IsSelected="True"/>
                                                     </ListBox>
@@ -245,12 +245,16 @@
                                                     <Button Name="RoundPlaceBlock" Click="RoundPlaceBlock_Click" Content="Get Your Position"  Style="{StaticResource  MaterialDesignFlatButton}"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Radius:" FontSize="15" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Radius:" FontSize="15" VerticalAlignment="Center" Name="RoundCreateMode"/>
                                                     <TextBox  VerticalAlignment="Center" Name="RoundRadius" MinWidth="70" TextChanged="TextBoxTextCheck_TextChanged"/>
+
+                                                    <TextBlock Opacity=".5" Text="+0.5=>" FontSize="15" VerticalAlignment="Center"/>
+                                                    <ToggleButton  VerticalAlignment="Center" Name="RoundModeToggle"   />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Block Name:" FontSize="15" VerticalAlignment="Center"/>
                                                     <TextBox  VerticalAlignment="Center" Name="RoundBlockName" MinWidth="70"/>
+
                                                 </StackPanel>
                                                 <Separator/>
                                                 <ListBox Style="{StaticResource MaterialDesignToolToggleListBox}" Name="RoundFillMode" SelectedIndex="0" SelectionChanged="SquareFillMode_SelectionChanged">

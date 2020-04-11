@@ -102,5 +102,10 @@ namespace MinecraftToolKit
             WindowSize.Kind = WindowState == WindowState.Maximized ? MaterialDesignThemes.Wpf.PackIconKind.ArrowCompress : MaterialDesignThemes.Wpf.PackIconKind.Add;
             //BorderGroupBox.Margin = WindowState == WindowState.Maximized ? new Thickness(6) : new Thickness(0);
          }
+
+        private void RadioButtonTesws_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadPage(new Pages.Tesws());
+        }
     }
 }

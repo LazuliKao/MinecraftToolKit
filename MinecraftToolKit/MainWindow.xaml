@@ -228,13 +228,19 @@
                                 </RadioButton>
                                 <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonWebsocket_Checked">
                                     <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
-                                        <materialDesign:PackIcon Foreground="White"  Kind="LanConnect" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <materialDesign:PackIcon Foreground="White"  Kind="Server" Width="24" Height="24"   VerticalAlignment="Center"/>
                                         <TextBlock Text="Websocket Server" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="RadioButtonTesws_Checked">
+                                    <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
+                                        <materialDesign:PackIcon Foreground="White"  Kind="LanConnect" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <TextBlock Text="Websocket Client" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
                                     </StackPanel>
                                 </RadioButton>
                                 <RadioButton Height="40" Style="{StaticResource TabRadioButton}" Checked="TabRadioButtonGithub_Checked">
                                     <StackPanel Orientation="Horizontal" Margin="7,0" Width="200">
-                                        <materialDesign:PackIcon Foreground="White"  Kind="GithubBox" Width="24" Height="24"   VerticalAlignment="Center"/>
+                                        <materialDesign:PackIcon Foreground="White"  Kind="Github" Width="24" Height="24"   VerticalAlignment="Center"/>
                                         <TextBlock Text="About" VerticalAlignment="Center" Margin="20,0" Foreground="White"/>
                                     </StackPanel>
                                 </RadioButton>

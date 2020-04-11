@@ -1,0 +1,112 @@
+﻿<Page x:Class="MinecraftToolKit.Pages.Tesws"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MinecraftToolKit.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
+      mc:Ignorable="d" 
+      d:DesignHeight="250" d:DesignWidth="500"
+      Title="tesws">
+    <Page.Resources>
+        <local:SelectedToBool x:Key="SelectedToBool" />
+        <local:Up0ToBool x:Key="Up0ToBool" /> 
+    </Page.Resources>
+    <Grid>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="0" Width="30" Margin="0,0,7,0" Click="SaveButton_Click" ToolTip="Save to config">
+                        <materialDesign:PackIcon Kind="ContentSave" Width="25" Height="25"/>
+                    </Button>
+                    <TextBlock Text="Address" VerticalAlignment="Center"/>
+                    <ComboBox Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Target Server" Grid.Column="1"
+                    Width="150" Margin="7,0,7,0" Name="SelectServer" materialDesign:TextFieldAssist.HasClearButton="True" SelectionChanged="SelectServer_SelectionChanged"/>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"  ToolTip="Connect to selected server" Click="ConnectButton_Click" IsEnabled="{Binding SelectedIndex,ElementName=SelectServer,Converter={StaticResource SelectedToBool}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Connect" VerticalAlignment="Center"/>
+                            <!--<materialDesign:PackIcon Kind="LanConnect" Width="30" Height="30"/>-->
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="0" ToolTip="Edit Selected Server" IsEnabled="{Binding SelectedIndex,ElementName=SelectServer,Converter={StaticResource SelectedToBool}}" Click="EditServerButton_Click">
+                        <materialDesign:PackIcon Kind="Edit" Width="30" Height="25"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="0" ToolTip="Add Server" Click="AddServerButton_Click">
+                        <materialDesign:PackIcon Kind="Add" Width="30" Height="30"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="0" ToolTip="Remove Selected Server" IsEnabled="{Binding SelectedIndex,ElementName=SelectServer,Converter={StaticResource SelectedToBool}}" Click="RemoveServerButton_Click">
+                        <materialDesign:PackIcon Kind="Remove" Width="30" Height="30"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="10,0" ToolTip="Clear output" Click="CleanButton_Click" Content="清屏" IsEnabled="{Binding Document.Blocks.Count,ElementName=OutPutText,Converter={StaticResource Up0ToBool},Mode=OneWay}" />
+                </StackPanel>
+            </Grid>
+            <RichTextBox  Margin="5" Background="AliceBlue" IsReadOnly="True" Grid.Row="1" Name="OutPutText" Block.LineHeight="1"/>
+            <Grid Grid.Row="2" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox AcceptsReturn="True" FontSize="16" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" MaxHeight="150" materialDesign:HintAssist.Hint="Message Content" Name="SendText" VerticalAlignment="Bottom"/>
+                <ComboBox Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Message type" Grid.Column="1"
+                 Width="150"    Margin="7,0,7,0" Name="SelectAction" materialDesign:TextFieldAssist.HasClearButton="True">
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Text"/>
+                            <TextBlock Text="RawText(%pwd%)"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AppleKeyboardCommand"/>
+                            <TextBlock Text="Command"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                </ComboBox>
+                <Button Grid.Column="2" IsEnabled="{Binding SelectedIndex,ElementName=SelectAction,Converter={StaticResource SelectedToBool}}" Style="{StaticResource MaterialDesignFlatButton}" Click="SendMessageButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Send" Margin="0,0,4,0"/>
+                        <materialDesign:PackIcon Kind="Send" Height="18" Width="18"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+        <materialDesign:DialogHost Name="Dialog">
+            <materialDesign:DialogHost.DialogContent >
+                <StackPanel Margin="10">
+                    <StackPanel  HorizontalAlignment="Center">
+                        <StackPanel  Orientation="Horizontal">
+                            <TextBlock Text="Address" VerticalAlignment="Center" Margin="0,0,5,0" Width="60"/>
+                            <TextBox Name="AddAddress" MinWidth="50" materialDesign:HintAssist.Hint="ws://xx.xx.xx.xx/mc"/>
+                        </StackPanel>
+                        <StackPanel  Orientation="Horizontal">
+                            <TextBlock Text="Password" VerticalAlignment="Center" Margin="0,0,5,0" Width="60"/>
+                            <TextBox Name="AddPWD" MinWidth="50" materialDesign:HintAssist.Hint="passwd"/>
+                        </StackPanel>
+                        <TextBlock Name="AddTip" Visibility="Collapsed" Margin="0,5,0,0"/>
+                        <!--<StackPanel  Orientation="Horizontal">
+                            <TextBlock Text="Address" VerticalAlignment="Center" Margin="0,0,5,0" Width="60"/>
+                            <TextBox MinWidth="50" materialDesign:HintAssist.Hint="ws://xx.xx.xx.xx/mc"/>
+                        </StackPanel>-->
+                    </StackPanel>
+                    <Separator Margin="0,10,0,3"/>
+                    <Grid  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Cancel" Click="CancelButton_Click"/>
+                        <Rectangle Fill="Gray" Grid.Column="1" Opacity="0.5" Width="2" Height="21"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Confirm" Grid.Column="2" Click="ConfirmButton_Click"/>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</Page>
