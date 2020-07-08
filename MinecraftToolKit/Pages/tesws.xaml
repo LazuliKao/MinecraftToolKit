@@ -82,7 +82,7 @@
                     <StackPanel  HorizontalAlignment="Center">
                         <StackPanel  Orientation="Horizontal">
                             <TextBlock Text="Address" VerticalAlignment="Center" Margin="0,0,5,0" Width="60"/>
-                            <TextBox Name="AddAddress" MinWidth="50" materialDesign:HintAssist.Hint="ws://xx.xx.xx.xx/mc"/>
+                            <TextBox Name="AddAddress" MinWidth="50" materialDesign:HintAssist.Hint="ws://xx.xx.xx.xx:29132/mc"/>
                         </StackPanel>
                         <StackPanel  Orientation="Horizontal">
                             <TextBlock Text="Password" VerticalAlignment="Center" Margin="0,0,5,0" Width="60"/>

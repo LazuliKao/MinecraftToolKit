@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using MaterialDesignThemes.Wpf;
 using System.Timers;
+using System.Net;
 
 namespace MinecraftToolKit.Pages
 {
@@ -69,11 +70,19 @@ namespace MinecraftToolKit.Pages
             }
             return ws_config;
         }
+
+
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                server = new WebSocketServer($"ws://127.0.0.1:{port}");
+                var ip = "127.0.0.1";
+                try
+                {
+                    ip = Dns.GetHostAddresses(Dns.GetHostName()).First(l => l.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
+                }
+                catch (Exception) { }
+                server = new WebSocketServer($"ws://0.0.0.0:{port}");
                 server.Start(socket =>
                 {
                     socket.OnOpen = () =>
@@ -273,13 +282,13 @@ namespace MinecraftToolKit.Pages
                 });
                 StartButton.IsEnabled = false;
                 StopButton.IsEnabled = true;
-                StateTextBlock.Text = $"Listening on 127.0.0.1:{port}";
-                OutPut($"Start listening at 127.0.0.1:{port}");
-                OutPut($"Enter \" /connect 127.0.0.1:{port} \" in Minecraft UWP to connect!");
+                StateTextBlock.Text = $"Listening on ws://0.0.0.0:{port}";
+                OutPut($"Start listening at ws://0.0.0.0:{port}");
+                OutPut($"Try to use \" /connect {ip}:{port} \" in Minecraft UWP to connect!");
             }
             catch (Exception err)
             {
-                OutPut("Start Failed:" + err.Message);
+                OutPut("Start Failed:" + err.ToString());
             }
         }
         public void UnInstall()
@@ -572,11 +581,11 @@ namespace MinecraftToolKit.Pages
                     List<Point> points = new List<Point>();
                     Dictionary<Point, Point> buildPoints = new Dictionary<Point, Point>();
                     #region Func
-                    bool add0dot5Fix =RoundModeToggle.IsChecked == true;
+                    bool add0dot5Fix = RoundModeToggle.IsChecked == true;
                     void AddPoint(int x, int y)
                     {
                         if (add0dot5Fix)
-                        { 
+                        {
                             if (RoundFillMode.SelectedIndex == 0)//fill
                             {
                                 if (!buildPoints.ContainsKey(new Point(x + 1, y + 1))) { buildPoints.Add(new Point(x + 1, y + 1), new Point(x + 1, -y)); }
@@ -678,9 +687,13 @@ namespace MinecraftToolKit.Pages
                 if (SquareFillMode.SelectedIndex == 3 || SquareFillMode.SelectedIndex == 4)
                 { SquareSurfacePanel.Visibility = Visibility.Visible; }
                 else
-                { SquareSurfacePanel.Visibility = Visibility.Collapsed; }
+                {
+                    try
+                    { SquareSurfacePanel.Visibility = Visibility.Collapsed; }
+                    catch (Exception) { return; }
+                }
             }
-            catch (Exception) { }
+            catch (Exception) { return; }
         }
         #endregion
         private void TextBoxTextCheck_TextChanged(object sender, TextChangedEventArgs e)

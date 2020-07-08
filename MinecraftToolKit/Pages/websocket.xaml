@@ -289,9 +289,9 @@
             </TabControl>
             <StackPanel  Grid.Row="2" Orientation="Horizontal" Margin="10,0,10,10">
                 <DockPanel x:Name="StartButton" >
-                    <TextBox  Style="{StaticResource MaterialDesignFloatingHintTextBox}"   Text="19130" TextChanged="PortTextBox_TextChanged"  VerticalAlignment="Center"   materialDesign:TextFieldAssist.HasClearButton="True" >
+                    <TextBox  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="0,-8,0,0" Text="19130" TextChanged="PortTextBox_TextChanged"  VerticalAlignment="Center"   materialDesign:TextFieldAssist.HasClearButton="True" >
                         <materialDesign:HintAssist.Hint>
-                            <StackPanel  Orientation="Horizontal"     Margin="-2 0 0 0">
+                            <StackPanel  Orientation="Horizontal"  Margin="-2,0,0,0">
                                 <materialDesign:PackIcon   Kind="AccessPoint" />
                                 <TextBlock Text="Port"/>
                             </StackPanel>
