@@ -25,8 +25,8 @@
                                         <TextBlock Text="作者 gxh" FontSize="20"/>
                                         <TextBlock Text="Version:0.0.1.b1" FontSize="20" />
                                         <TextBlock Text="不允许任何方式的转载" Foreground="Red" FontSize="20"/>
-                                        <TextBlock Text="因为种种原因，软件不开源QwQ"  Foreground="Red" FontSize="20"/>
-                                        <TextBlock Text="请务必将本软件用在生产力上，合理使用"  Foreground="Red" FontSize="20"/>
+                                        <TextBlock Text="实验性工具，并无太多功能"  Foreground="Red" FontSize="20"/>
+                                        <TextBlock Text=""  Foreground="Red" FontSize="20"/>
                                     </StackPanel>
                                 </Grid>
                             </ScrollViewer.Content>
